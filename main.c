@@ -18,6 +18,14 @@ int main() {
   int cep;
   char dataNascimento[15];
 
+  FILE *contatos;
+  contatos = fopen ("contatos.txt","a+b");
+  if (contatos == NULL) {
+     printf ("Houve um erro ao abrir o arquivo.\n");
+     return 1;
+  }
+  printf ("Arquivo INFORMACOESRU criado com sucesso.\n");
+
   printf("Escolha uma opcao: ");
   scanf("%d", &opcao);
   while(opcao != 0){
@@ -28,19 +36,25 @@ int main() {
         printf("Nome: ");
         getchar();
         fgets(nome, 101, stdin);
+        fprintf(contatos, "%s", nome);
         printf("Telefone: ");
         getchar();
         fgets(telefone, 15, stdin);
+        fprintf(contatos, "%s", telefone);
         printf("Endereço: ");
         getchar();
         fgets(endereco, 101, stdin);
+        fprintf(contatos, "%s", endereco);
         printf("CEP: ");
         scanf("%d", &cep);
+        fprintf(contatos, "%d\n", cep);
         printf("Data de Nascimento: ");
         getchar();
         fgets(dataNascimento, 15, stdin);
+        fprintf(contatos, "%s", dataNascimento);
+        fprintf(contatos, "$\n");
 
-        l = insere(l, nome, telefone, endereco, cep, dataNascimento);
+        l = insere(contatos, l, nome, telefone, endereco, cep, dataNascimento);
         printf("\n");
         break;
 
@@ -50,6 +64,7 @@ int main() {
         getchar();
         fgets(nome, 101, stdin);
         l = retira(l, nome);
+
         break;
 
       case 3:
