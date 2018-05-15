@@ -4,12 +4,12 @@
 #include <ctype.h>
 #include "lista.h"
 #include "menu.h"
-#include "arquivo.h"
 
 int main() {
   Lista* l;
 
   int opcao, desejaVoltar;
+  char dolar[2];
   char nome[101];
   char telefone[15];
   char endereco[101];
@@ -20,30 +20,19 @@ int main() {
   l = inicializa();
 
   FILE *contatos;
-  contatos = fopen ("contatos.txt","a");
+  contatos = fopen ("contatos.txt","a+r");
   if (contatos == NULL) {
     printf ("Houve um erro ao abrir o arquivo.\n");
     return 1;
   }
   printf ("Arquivo INFORMACOESRU criado com sucesso.\n");
 
-  // if(get_size(contatos) == 0){
-  //   printf("O arquivo esta vazio.");
-  // }else{
-  //   printf("O arquivo nao esta vazio.");
-  //
-  //   while(!feof(contatos)){
-  //     fgets(nome, 101, contatos);
-  //     fgets(telefone, 15, contatos);
-  //     fgets(endereco, 101, contatos);
-  //     fgets(cepString, 15, contatos);
-  //     fgets(dataNascimento, 15, contatos);
-  //     fgets(caracter, 2, contatos);
-  //     cep = atoi(cepString);
-  //
-  //     l = insere(l, nome, telefone, endereco, cep, dataNascimento);
-  //   }
-  // }
+  setbuf(stdin, NULL);
+  while((fscanf(contatos,"%[^\n]\n%s\n%s\n%d\n%s\n%s", nome, telefone, endereco, &cep, dataNascimento, dolar))!=EOF){
+    setbuf(stdin, NULL);
+    l = insere(l, nome, telefone, endereco, cep, dataNascimento);
+  }
+  // insereDoArquivo(l, contatos);
 
   paginaInicial();
 
@@ -111,7 +100,9 @@ int main() {
     }
   }
 
+  contatos = fopen("contatos.txt", "a+w");
   insereArquivo(l, contatos);
+  fclose(contatos);
 
   return 0;
 }
