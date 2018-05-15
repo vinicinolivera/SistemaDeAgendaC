@@ -8,22 +8,22 @@
 
 int main() {
   Lista* l;
-  l = inicializa();
-
-  paginaInicial();
 
   int opcao, desejaVoltar;
   char nome[101];
   char telefone[15];
   char endereco[101];
   int cep;
+  char caracter[2];
+  char cepString[10];
   char dataNascimento[15];
+  l = inicializa();
 
   FILE *contatos;
   contatos = fopen ("contatos.txt","a");
   if (contatos == NULL) {
-     printf ("Houve um erro ao abrir o arquivo.\n");
-     return 1;
+    printf ("Houve um erro ao abrir o arquivo.\n");
+    return 1;
   }
   printf ("Arquivo INFORMACOESRU criado com sucesso.\n");
   
@@ -32,6 +32,26 @@ int main() {
   }else{
     printf("O arquivo nao esta vazio.");
   }
+
+  if(get_size(contatos) == 0){
+    printf("O arquivo esta vazio.");
+  }else{
+    printf("O arquivo nao esta vazio.");
+
+    while(!feof(contatos)){
+      fgets(nome, 101, contatos);
+      fgets(telefone, 15, contatos);
+      fgets(endereco, 101, contatos);
+      fgets(cepString, 15, contatos);
+      fgets(dataNascimento, 15, contatos);
+      fgets(caracter, 2, contatos);
+      cep = atoi(cepString);
+
+      l = insere(l, nome, telefone, endereco, cep, dataNascimento);
+    }
+  }
+
+  paginaInicial();
 
   printf("Escolha uma opcao: ");
   scanf("%d", &opcao);
@@ -61,7 +81,7 @@ int main() {
         fprintf(contatos, "%s", dataNascimento);
         fprintf(contatos, "$\n");
 
-        l = insere(contatos, l, nome, telefone, endereco, cep, dataNascimento);
+        l = insere(l, nome, telefone, endereco, cep, dataNascimento);
         printf("\n");
         break;
 

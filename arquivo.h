@@ -1,6 +1,8 @@
 #ifndef arquivo_h
 #define arquivo_h
 
+int get_size(FILE* contatos);
+
 int get_size(FILE* contatos){
 
     if(contatos == NULL)
