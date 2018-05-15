@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "lista.h"
 #include "menu.h"
+#include "arquivo.h"
 
 int main() {
   Lista* l;
@@ -19,12 +20,18 @@ int main() {
   char dataNascimento[15];
 
   FILE *contatos;
-  contatos = fopen ("contatos.txt","a+b");
+  contatos = fopen ("contatos.txt","a");
   if (contatos == NULL) {
      printf ("Houve um erro ao abrir o arquivo.\n");
      return 1;
   }
   printf ("Arquivo INFORMACOESRU criado com sucesso.\n");
+  
+  if(get_size(contatos) == 0){
+    printf("O arquivo esta vazio.");
+  }else{
+    printf("O arquivo nao esta vazio.");
+  }
 
   printf("Escolha uma opcao: ");
   scanf("%d", &opcao);
@@ -81,7 +88,7 @@ int main() {
         break;
 
       case 0:
-
+        // libera(l);
         break;
     }
 

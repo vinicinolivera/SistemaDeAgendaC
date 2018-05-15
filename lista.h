@@ -22,7 +22,7 @@ Lista* inicializa(){
 }
 
 /*inserção no inicio: retorna a lista atualizada*/
-Lista* insere(Lista* l, char nome[101], char telefone[15],
+Lista* insere(FILE* contatos, Lista* l, char nome[101], char telefone[15],
               char endereco[101], int cep, char dataNascimento[15]){
 
   Lista* novo = (Lista*) malloc(sizeof(Lista));
@@ -37,6 +37,7 @@ Lista* insere(Lista* l, char nome[101], char telefone[15],
   //insere na lista
   novo->contato = c;
   novo->prox = l;
+  // fwrite(&c, sizeof(struct contato),1, contatos);
   printf("Contato criado com sucesso\n\n");
   return novo;
 }
@@ -111,16 +112,16 @@ Lista* retira(Lista* l, char nome[101]){
   free(p);
   return l;
 }
-//
-// /*funcao libera lista*/
-// void libera(Lista* l){
-//   Lista* p = l;
-//
-//   while (p != NULL){
-//     Lista* t = p->prox; //guarda referencia para o proximo elemento
-//     free(p); //libera memoria apontada por p
-//     p = t; //faz p apontar para o proximo
-//   }
-// }
+
+/*funcao libera lista*/
+void libera(Lista* l){
+  Lista* p = l;
+
+  while (p != NULL){
+    Lista* t = p->prox; //guarda referencia para o proximo elemento
+    free(p); //libera memoria apontada por p
+    p = t; //faz p apontar para o proximo
+  }
+}
 
 #endif
