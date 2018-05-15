@@ -6,7 +6,7 @@ void paginaInicial();
 //PAGINA INICIAL PROGRAMA (OP�OES)
 void paginaInicial(){
     int i;
-    system("clear");
+    // system("clear");
 
     for (i=0; i<80; i++){
         printf("*");

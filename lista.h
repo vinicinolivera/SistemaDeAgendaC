@@ -22,7 +22,7 @@ Lista* inicializa(){
 }
 
 /*inserção no inicio: retorna a lista atualizada*/
-Lista* insere(FILE* contatos, Lista* l, char nome[101], char telefone[15],
+Lista* insere(Lista* l, char nome[101], char telefone[15],
               char endereco[101], int cep, char dataNascimento[15]){
 
   Lista* novo = (Lista*) malloc(sizeof(Lista));
@@ -37,7 +37,6 @@ Lista* insere(FILE* contatos, Lista* l, char nome[101], char telefone[15],
   //insere na lista
   novo->contato = c;
   novo->prox = l;
-  // fwrite(&c, sizeof(struct contato),1, contatos);
   printf("Contato criado com sucesso\n\n");
   return novo;
 }
@@ -51,6 +50,25 @@ void imprime(Lista* l){
     printf("Endereço: %s", p->contato->endereco);
     printf("CEP: %d\n", p->contato->cep);
     printf("Data de Nascimento: %s\n", p->contato->dataNascimento);
+  }
+}
+
+void insereArquivo(Lista* l, FILE* contatos){
+  Lista* p;
+  for(p = l; p != NULL; p = p->prox){
+    fprintf(contatos, "%s", p->contato->nome);
+    fprintf(contatos, "%s", p->contato->telefone);
+    fprintf(contatos, "%s", p->contato->endereco);
+    fprintf(contatos, "%d\n", p->contato->cep);
+    fprintf(contatos, "%s", p->contato->dataNascimento);
+    fprintf(contatos, "$\n");
+  }
+}
+
+void insereDoArquivo(Lista* l, FILE* contatos){
+  char aux[2] = '-';
+  while(!feof(contatos) && aux != '$'){
+    
   }
 }
 

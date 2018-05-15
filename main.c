@@ -26,30 +26,24 @@ int main() {
     return 1;
   }
   printf ("Arquivo INFORMACOESRU criado com sucesso.\n");
-  
-  if(get_size(contatos) == 0){
-    printf("O arquivo esta vazio.");
-  }else{
-    printf("O arquivo nao esta vazio.");
-  }
 
-  if(get_size(contatos) == 0){
-    printf("O arquivo esta vazio.");
-  }else{
-    printf("O arquivo nao esta vazio.");
-
-    while(!feof(contatos)){
-      fgets(nome, 101, contatos);
-      fgets(telefone, 15, contatos);
-      fgets(endereco, 101, contatos);
-      fgets(cepString, 15, contatos);
-      fgets(dataNascimento, 15, contatos);
-      fgets(caracter, 2, contatos);
-      cep = atoi(cepString);
-
-      l = insere(l, nome, telefone, endereco, cep, dataNascimento);
-    }
-  }
+  // if(get_size(contatos) == 0){
+  //   printf("O arquivo esta vazio.");
+  // }else{
+  //   printf("O arquivo nao esta vazio.");
+  //
+  //   while(!feof(contatos)){
+  //     fgets(nome, 101, contatos);
+  //     fgets(telefone, 15, contatos);
+  //     fgets(endereco, 101, contatos);
+  //     fgets(cepString, 15, contatos);
+  //     fgets(dataNascimento, 15, contatos);
+  //     fgets(caracter, 2, contatos);
+  //     cep = atoi(cepString);
+  //
+  //     l = insere(l, nome, telefone, endereco, cep, dataNascimento);
+  //   }
+  // }
 
   paginaInicial();
 
@@ -63,23 +57,17 @@ int main() {
         printf("Nome: ");
         getchar();
         fgets(nome, 101, stdin);
-        fprintf(contatos, "%s", nome);
         printf("Telefone: ");
         getchar();
         fgets(telefone, 15, stdin);
-        fprintf(contatos, "%s", telefone);
         printf("Endereço: ");
         getchar();
         fgets(endereco, 101, stdin);
-        fprintf(contatos, "%s", endereco);
         printf("CEP: ");
         scanf("%d", &cep);
-        fprintf(contatos, "%d\n", cep);
         printf("Data de Nascimento: ");
         getchar();
         fgets(dataNascimento, 15, stdin);
-        fprintf(contatos, "%s", dataNascimento);
-        fprintf(contatos, "$\n");
 
         l = insere(l, nome, telefone, endereco, cep, dataNascimento);
         printf("\n");
@@ -107,9 +95,6 @@ int main() {
         imprime(l);
         break;
 
-      case 0:
-        // libera(l);
-        break;
     }
 
     for (int i=0; i<80; i++){
@@ -122,9 +107,11 @@ int main() {
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
     }
-
     else{
     }
   }
+
+  insereArquivo(l, contatos);
+
   return 0;
 }
