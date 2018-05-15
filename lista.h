@@ -111,16 +111,16 @@ Lista* retira(Lista* l, char nome[101]){
   free(p);
   return l;
 }
-//
-// /*funcao libera lista*/
-// void libera(Lista* l){
-//   Lista* p = l;
-//
-//   while (p != NULL){
-//     Lista* t = p->prox; //guarda referencia para o proximo elemento
-//     free(p); //libera memoria apontada por p
-//     p = t; //faz p apontar para o proximo
-//   }
-// }
+
+/*funcao libera lista*/
+void libera(Lista* l){
+  Lista* p = l;
+
+  while (p != NULL){
+    Lista* t = p->prox; //guarda referencia para o proximo elemento
+    free(p); //libera memoria apontada por p
+    p = t; //faz p apontar para o proximo
+  }
+}
 
 #endif
