@@ -28,7 +28,7 @@ int main() {
   printf ("Arquivo INFORMACOESRU criado com sucesso.\n");
 
   setbuf(stdin, NULL);
-  while((fscanf(contatos,"%[^\n]\n%s\n%s\n%d\n%s\n%s", nome, telefone, endereco, &cep, dataNascimento, dolar))!=EOF){
+  while((fscanf(contatos,"%s\n%s\n%s\n%d\n%s\n%s", nome, telefone, endereco, &cep, dataNascimento, dolar))!=EOF){
     setbuf(stdin, NULL);
     l = insere(l, nome, telefone, endereco, cep, dataNascimento);
   }
