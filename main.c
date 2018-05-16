@@ -20,15 +20,15 @@ int main() {
   l = inicializa();
 
   FILE *contatos;
-  contatos = fopen ("contatos.txt","a+r");
+  contatos = fopen ("contatos.txt","a+");
   if (contatos == NULL) {
     printf ("Houve um erro ao abrir o arquivo.\n");
     return 1;
   }
-  printf ("Arquivo INFORMACOESRU criado com sucesso.\n");
+  printf ("Arquivo Agenda criado com sucesso.\n");
 
   setbuf(stdin, NULL);
-  while((fscanf(contatos,"%[^\n]\n%s\n%s\n%d\n%s\n%s", nome, telefone, endereco, &cep, dataNascimento, dolar))!=EOF){
+  while((fscanf(contatos,"%s\n%s\n%s\n%d\n%s\n%s", nome, telefone, endereco, &cep, dataNascimento, dolar))!=EOF){
     setbuf(stdin, NULL);
     l = insere(l, nome, telefone, endereco, cep, dataNascimento);
   }
@@ -83,6 +83,13 @@ int main() {
         system("clear");
         imprime(l);
         break;
+      case 9:
+        system("clear");
+        insereArquivo(l, contatos);
+        fclose(contatos);
+        libera(l);
+        printf("Dados salvos com sucesso!");
+        break;
 
     }
 
@@ -100,9 +107,9 @@ int main() {
     }
   }
 
-  contatos = fopen("contatos.txt", "a+w");
-  insereArquivo(l, contatos);
-  fclose(contatos);
+  //contatos = fopen("contatos.txt", "a+");
+  //insereArquivo(l, contatos);
+  //fclose(contatos);
 
   return 0;
 }

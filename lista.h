@@ -49,7 +49,7 @@ void imprime(Lista* l){
     printf("Nome: %s\n", p->contato->nome);
     printf("Telefone: %s\n", p->contato->telefone);
     printf("Endereço: %s\n", p->contato->endereco);
-    printf("CEP: %d\n", p->contato->cep);
+    printf("CEP: %d\n\n", p->contato->cep);
     printf("Data de Nascimento: %s\n", p->contato->dataNascimento);
   }
 }
