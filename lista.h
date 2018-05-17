@@ -51,14 +51,18 @@ Lista* insere(Lista* l, char nome[101], char telefone[15],
   novo->contato = c;
   novo->prox = l;
 
+  return novo;
+}
+
+void listaOrdenada(Lista* l){
   //CRIANDO ORDENACAO
   int tam = tamanho(l);
-  // printf("%d\n", tam);
+  printf("%d\n", tam);
   int i, j;
   Lista* atual;
 
   for(atual = l; atual != NULL; atual=atual->prox) {
-    // printf("%s\n", atual->contato->nome);
+    printf("%s\n", atual->contato->nome);
 
     // for (j = i - 1; (j >= 0) && (atual->contato->nome < l[j]->contato->nome); j--) {
     //   l[j + 1]->contato->nome = l[j]->contato->nome;
@@ -66,8 +70,6 @@ Lista* insere(Lista* l, char nome[101], char telefone[15],
     //
     // l[j+1]->contato->nome = atual->contato->nome;
   }
-
-  return novo;
 }
 
 /*funçao imprime: imprime valores dos elementos*/
@@ -79,7 +81,10 @@ void imprime(Lista* l){
     printf("Endereço: %s", p->contato->endereco);
     printf("CEP: %s", p->contato->cepString);
     printf("Data de Nascimento: %s", p->contato->dataNascimento);
-    printf("\n***********************************\n");
+    for (int i=0; i<80; i++){
+        printf("*");
+    }
+    printf("\n\n");
   }
 }
 
@@ -128,6 +133,7 @@ Lista* busca(Lista* l, char nome[101]){
 Lista* retira(Lista* l, char nome[101]){
   Lista* ant = NULL; //ponteiro para elemento anterior
   Lista* p = l; //ponteiro para percorrer a lista_h
+  int desejaVoltar;
 
   /*procura elemento na lista, guardando anterior*/
   while(p != NULL && strcmp(p->contato->nome, nome) != 0){
@@ -137,17 +143,52 @@ Lista* retira(Lista* l, char nome[101]){
 
   /*verifica se achou elemento*/
   if(p == NULL){
+    printf("Não encontrei o contato %s\n\n", nome);
     return l; // não achou: retorna lista original
   }
 
   /*retira elemento*/
   if(ant == NULL){
     //retira primeiro elemento
-    l = p->prox;
+    printf("Encontrei o contato %s\n\n", nome);
+    busca(l, nome);
+    printf("Deseja realmente excluir? (1)Sim, (2)Não\n");
+    scanf("%d", &desejaVoltar);
+    while (desejaVoltar != 1 && desejaVoltar !=2) {
+      printf("ATENÇÃO* Opção invalida");
+      printf("\nDeseja voltar para o menu? 1(Sim), 2(Não): ");
+      scanf("%d", &desejaVoltar);
+     }
+
+     if(desejaVoltar == 1){
+         printf("Contato Excluido!\n\n");
+         l = p->prox;
+         // system("clear");
+     }
+     else if(desejaVoltar == 2){
+       return l;
+     }
   }
   else{
       //retira elemento do meio da lista
-      ant->prox = p->prox;
+      printf("Encontrei o contato %s\n\n", nome);
+      busca(l, nome);
+      printf("Deseja realmente excluir? (1)Sim, (2)Não\n");
+      scanf("%d", &desejaVoltar);
+      while (desejaVoltar != 1 && desejaVoltar !=2) {
+        printf("ATENÇÃO* Opção invalida");
+        printf("\nDeseja voltar para o menu? 1(Sim), 2(Não): ");
+        scanf("%d", &desejaVoltar);
+       }
+
+       if(desejaVoltar == 1){
+           printf("Contato Excluido!\n\n");
+           ant->prox = p->prox;
+           // system("clear");
+       }
+       else if(desejaVoltar == 2){
+         return l;
+       }
   }
 
   free(p);

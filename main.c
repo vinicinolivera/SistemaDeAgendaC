@@ -40,7 +40,7 @@ int main() {
   for(int j = 1; j <= i; j+=6){
     // printf("%s", variavel[j]);
     l = insere(l, variavel[j], variavel[j+1], variavel[j+2], variavel[j+3], variavel[j+4]);
-
+    listaOrdenada(l);
   }
 
   paginaInicial();
@@ -68,6 +68,7 @@ int main() {
         fgets(dataNascimento, 15, stdin);
 
         l = insere(l, nome, telefone, endereco, cepString, dataNascimento);
+        listaOrdenada(l);
         printf("\n");
         break;
 
@@ -92,13 +93,6 @@ int main() {
         system("clear");
         imprime(l);
         break;
-      // case 9:
-      //   system("clear");
-      //   insereArquivo(l, contatos);
-      //   fclose(contatos);
-      //   libera(l);
-      //   printf("Dados salvos com sucesso!");
-      //   break;
 
     }
 
