@@ -6,7 +6,7 @@ void paginaInicial();
 //PAGINA INICIAL PROGRAMA (OP�OES)
 void paginaInicial(){
     int i;
-    // system("clear");
+    system("clear");
 
     for (i=0; i<80; i++){
         printf("*");
@@ -27,7 +27,6 @@ void paginaInicial(){
     printf("(2)Remover contato\n");
     printf("(3)Visualizar contato\n");
     printf("(4)Visualizar todos os contatos\n");
-    printf("(9)Salvar dados no arquivo\n");
     printf("(0)Para sair\n");
     for (i=0; i<80; i++){
         printf("*");

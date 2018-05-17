@@ -5,7 +5,7 @@ struct contato{
   char nome[101];
   char telefone[15];
   char endereco[101];
-  int cep;
+  char cepString[20];
   char dataNascimento[15];
 };
 typedef struct contato Contato;
@@ -25,7 +25,7 @@ Lista* inicializa(){
 
 /*inserção no inicio: retorna a lista atualizada*/
 Lista* insere(Lista* l, char nome[101], char telefone[15],
-              char endereco[101], int cep, char dataNascimento[15]){
+              char endereco[101], char cepString[20], char dataNascimento[15]){
 
   Lista* novo = (Lista*) malloc(sizeof(Lista));
   Contato* c = (Contato*) malloc(sizeof(Contato));
@@ -33,7 +33,7 @@ Lista* insere(Lista* l, char nome[101], char telefone[15],
   strcpy(c->nome, nome);
   strcpy(c->telefone, telefone);
   strcpy(c->endereco, endereco);
-  c->cep = cep;
+  strcpy(c->cepString, cepString);
   strcpy(c->dataNascimento, dataNascimento);
 
   //insere na lista
@@ -46,11 +46,12 @@ Lista* insere(Lista* l, char nome[101], char telefone[15],
 void imprime(Lista* l){
   Lista* p;
   for(p = l; p != NULL; p = p->prox){
-    printf("Nome: %s\n", p->contato->nome);
-    printf("Telefone: %s\n", p->contato->telefone);
-    printf("Endereço: %s\n", p->contato->endereco);
-    printf("CEP: %d\n\n", p->contato->cep);
-    printf("Data de Nascimento: %s\n", p->contato->dataNascimento);
+    printf("Nome: %s", p->contato->nome);
+    printf("Telefone: %s", p->contato->telefone);
+    printf("Endereço: %s", p->contato->endereco);
+    printf("CEP: %s", p->contato->cepString);
+    printf("Data de Nascimento: %s", p->contato->dataNascimento);
+    printf("\n***********************************\n");
   }
 }
 
@@ -60,7 +61,7 @@ void insereArquivo(Lista* l, FILE* contatos){
     fprintf(contatos, "%s", p->contato->nome);
     fprintf(contatos, "%s", p->contato->telefone);
     fprintf(contatos, "%s", p->contato->endereco);
-    fprintf(contatos, "%d", p->contato->cep);
+    fprintf(contatos, "%s", p->contato->cepString);
     fprintf(contatos, "%s", p->contato->dataNascimento);
     fprintf(contatos, "$\n");
   }
@@ -85,7 +86,7 @@ Lista* busca(Lista* l, char nome[101]){
       printf("Nome: %s", p->contato->nome);
       printf("Telefone: %s", p->contato->telefone);
       printf("Endereço: %s", p->contato->endereco);
-      printf("CEP: %d\n", p->contato->cep);
+      printf("CEP: %s", p->contato->cepString);
       printf("Data de Nascimento: %s\n", p->contato->dataNascimento);
       return p;
     }

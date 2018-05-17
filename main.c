@@ -15,24 +15,33 @@ int main() {
   char endereco[101];
   int cep;
   char caracter[2];
-  char cepString[10];
+  char cepString[20];
   char dataNascimento[15];
+  char* variavel[1001];
   l = inicializa();
+  int i = 1;
 
   FILE *contatos;
-  contatos = fopen ("contatos.txt","a+");
+  contatos = fopen ("contatos.txt","a+r");
   if (contatos == NULL) {
     printf ("Houve um erro ao abrir o arquivo.\n");
     return 1;
   }
   printf ("Arquivo Agenda criado com sucesso.\n");
 
-  setbuf(stdin, NULL);
-  while((fscanf(contatos,"%s\n%s\n%s\n%d\n%s\n%s", nome, telefone, endereco, &cep, dataNascimento, dolar))!=EOF){
-    setbuf(stdin, NULL);
-    l = insere(l, nome, telefone, endereco, cep, dataNascimento);
+  while(fgets(nome, sizeof(nome), contatos)!=NULL){
+    variavel[i] = strdup(nome);
+    i++;
   }
-  // insereDoArquivo(l, contatos);
+  i--;
+  // printf("%d\n",i);
+  // printf("(%d)\n", i/6);
+
+  for(int j = 1; j <= i; j+=6){
+    // printf("%s", variavel[j]);
+    l = insere(l, variavel[j], variavel[j+1], variavel[j+2], variavel[j+3], variavel[j+4]);
+
+  }
 
   paginaInicial();
 
@@ -47,18 +56,18 @@ int main() {
         getchar();
         fgets(nome, 101, stdin);
         printf("Telefone: ");
-        getchar();
+
         fgets(telefone, 15, stdin);
         printf("Endereço: ");
-        getchar();
+
         fgets(endereco, 101, stdin);
         printf("CEP: ");
-        scanf("%d", &cep);
+        fgets(cepString, 20, stdin);
+
         printf("Data de Nascimento: ");
-        getchar();
         fgets(dataNascimento, 15, stdin);
 
-        l = insere(l, nome, telefone, endereco, cep, dataNascimento);
+        l = insere(l, nome, telefone, endereco, cepString, dataNascimento);
         printf("\n");
         break;
 
@@ -83,13 +92,13 @@ int main() {
         system("clear");
         imprime(l);
         break;
-      case 9:
-        system("clear");
-        insereArquivo(l, contatos);
-        fclose(contatos);
-        libera(l);
-        printf("Dados salvos com sucesso!");
-        break;
+      // case 9:
+      //   system("clear");
+      //   insereArquivo(l, contatos);
+      //   fclose(contatos);
+      //   libera(l);
+      //   printf("Dados salvos com sucesso!");
+      //   break;
 
     }
 
@@ -98,18 +107,28 @@ int main() {
     }
     printf("\nDeseja voltar para o menu? 1(Sim), 2(Não): ");
     scanf("%d", &desejaVoltar);
-    if(desejaVoltar == 1){
-        paginaInicial();
-        printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
-    }
-    else{
-    }
+    while (desejaVoltar != 1 && desejaVoltar !=2) {
+      printf("ATENÇÃO* Opção invalida");
+      printf("\nDeseja voltar para o menu? 1(Sim), 2(Não): ");
+      scanf("%d", &desejaVoltar);
+     }
+
+     if(desejaVoltar == 1){
+         paginaInicial();
+         printf("Escolha uma opcao: ");
+         scanf("%d", &opcao);
+         // system("clear");
+     }
+     else if(desejaVoltar == 2){
+       //deixar criar mais
+     }
+
   }
 
-  //contatos = fopen("contatos.txt", "a+");
-  //insereArquivo(l, contatos);
-  //fclose(contatos);
+  contatos = fopen("contatos.txt", "w");
+  insereArquivo(l, contatos);
+  fclose(contatos);
+  libera(l);
 
   return 0;
 }
