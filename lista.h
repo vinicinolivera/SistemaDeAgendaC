@@ -57,12 +57,12 @@ Lista* insere(Lista* l, char nome[101], char telefone[15],
 void listaOrdenada(Lista* l){
   //CRIANDO ORDENACAO
   int tam = tamanho(l);
-  printf("%d\n", tam);
+  // printf("%d\n", tam);
   int i, j;
   Lista* atual;
 
   for(atual = l; atual != NULL; atual=atual->prox) {
-    printf("%s\n", atual->contato->nome);
+    // printf("%s\n", atual->contato->nome);
 
     // for (j = i - 1; (j >= 0) && (atual->contato->nome < l[j]->contato->nome); j--) {
     //   l[j + 1]->contato->nome = l[j]->contato->nome;
