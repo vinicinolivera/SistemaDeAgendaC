@@ -60,15 +60,18 @@ void listaOrdenada(Lista* l){
   // printf("%d\n", tam);
   int i, j;
   Lista* atual;
+  Lista* p;
+  Lista* aux;
+  char nome[101];
 
-  for(atual = l; atual != NULL; atual=atual->prox) {
-    // printf("%s\n", atual->contato->nome);
-
-    // for (j = i - 1; (j >= 0) && (atual->contato->nome < l[j]->contato->nome); j--) {
-    //   l[j + 1]->contato->nome = l[j]->contato->nome;
-    // }
-    //
-    // l[j+1]->contato->nome = atual->contato->nome;
+  for(atual = l; atual != NULL; atual = atual->prox) {
+    aux = atual;
+    printf("%s\n", aux->contato->nome);
+    if (strcmp(atual->contato->nome, aux->contato->nome) > 0) {
+      strcpy(nome, atual->contato->nome);
+      strcpy(atual->contato->nome, aux->contato->nome);
+      strcpy(aux->contato->nome, nome);
+    }
   }
 }
 

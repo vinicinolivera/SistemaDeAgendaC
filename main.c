@@ -40,8 +40,8 @@ int main() {
   for(int j = 1; j <= i; j+=6){
     // printf("%s", variavel[j]);
     l = insere(l, variavel[j], variavel[j+1], variavel[j+2], variavel[j+3], variavel[j+4]);
-    listaOrdenada(l);
   }
+  listaOrdenada(l);
 
   paginaInicial();
 
